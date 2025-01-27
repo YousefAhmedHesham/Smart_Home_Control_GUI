@@ -8,7 +8,8 @@ This project is a **Smart Home Control** GUI application built using **PyQt5**. 
 - **Temperature Monitoring:** Displays real-time temperature readings and raises warnings if the temperature exceeds a set threshold.  
 - **Door Status Logging:** Monitors door status updates and logs timestamped entries in a table.  
 - **HMI Interface:** User-friendly graphical controls with interactive buttons and icons.  
-- **Serial Communication:** Uses **UART (Serial Communication)** to interface with external hardware.  
+- **Serial Communication:** Uses **UART (Serial Communication)** to interface with external hardware.
+- Ensure the correct COM port is set in the script before running the application. 
 
 ## Technologies Used  
 - **Python** (PyQt5 for GUI, PySerial for serial communication, threading for UART handling)  
