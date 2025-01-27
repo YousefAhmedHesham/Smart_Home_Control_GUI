@@ -9,7 +9,9 @@ This project is a **Smart Home Control** GUI application built using **PyQt5**. 
 - **Door Status Logging:** Monitors door status updates and logs timestamped entries in a table.  
 - **HMI Interface:** User-friendly graphical controls with interactive buttons and icons.  
 - **Serial Communication:** Uses **UART (Serial Communication)** to interface with external hardware.
-- Ensure the correct COM port is set in the script before running the application. 
+- Ensure the correct COM port is set in the script before running the application.
+
+  ![Image](https://github.com/user-attachments/assets/dc1c0fba-7057-42e4-9084-dcde655167f2)
 
 ## Technologies Used  
 - **Python** (PyQt5 for GUI, PySerial for serial communication, threading for UART handling)  
