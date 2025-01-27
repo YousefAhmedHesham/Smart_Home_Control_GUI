@@ -1,0 +1,41 @@
+##IAR Ninja build file
+
+
+#Rules
+rule COMPILER_XCL
+  command = C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\XclFileGenerator.exe $xclcommand -f "$rspfile_name"
+  description = IAR_NEW_TOOL+++COMPILER_XCL+++$in+++C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\XclFileGenerator.exe $flags
+  rspfile = $rspfile_name
+  rspfile_content = $flags
+
+rule INDEXER
+  command = C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\SourceIndexer.exe $flags
+  depfile = $out.dep
+  description = IAR_NEW_TOOL+++INDEXER+++$out+++C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\SourceIndexer.exe $flags
+
+rule MAKEBROWSE
+  command = C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\makeBrowseData.exe $flags
+  description = IAR_NEW_TOOL+++MAKEBROWSE+++$out+++C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\makeBrowseData.exe $flags
+
+rule PDBLINK
+  command = C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\PbdLink.exe $flags
+  description = IAR_NEW_TOOL+++PDBLINK+++$out+++C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\common\bin\PbdLink.exe $flags
+
+
+
+#Build steps
+build C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\ahmed\Desktop\GUI_Test\main.c -xcl_file C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.xcl -macro_file C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\arm\bin\iccarm.exe"
+  flags = C$:\Users\ahmed\Desktop\GUI_Test\main.c -D ewarm -D PART_TM4C123GH6PM -D TARGET_IS_TM4C123_RB1 -o C$:\Users\ahmed\Desktop\GUI_Test\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.0\arm\inc\c\DLib_Config_Normal.h" -I C$:\ti\TivaWare_C_Series-2.2.0.295\ -Ol --predef_macros C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.tmp
+  rspfile_name = C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.xcl.rsp
+
+build C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.pbi : INDEXER C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.xcl |  $
+C$:\Users\ahmed\Desktop\GUI_Test\main.c
+  flags = -out=C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.pbi -f C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.xcl
+
+build C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\GUI_Test.pbw : MAKEBROWSE C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\GUI_Test.pbd
+  flags = C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\GUI_Test.pbd -output C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\GUI_Test.pbw
+
+build C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\GUI_Test.pbd : PDBLINK C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.pbi
+  flags = -M C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\GUI_Test.pbd C$:\Users\ahmed\Desktop\GUI_Test\Debug\BrowseInfo\main.pbi
+
